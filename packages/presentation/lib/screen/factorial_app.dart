@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:presentation/screen/main/main_screen.dart';
 
-import 'app_injector.dart';
+import 'main/main_screen.dart';
 
-void main() async {
-  await initAppInjector();
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class FactorialApp extends StatelessWidget {
+  const FactorialApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
