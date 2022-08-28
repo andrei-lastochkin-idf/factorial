@@ -1,9 +1,11 @@
 import 'package:domain/repository/palindrome_repository.dart';
+import 'package:injectable/injectable.dart';
 
 import '../service/api_base_service.dart';
 import '../utils/const.dart';
 import 'package:domain/model/factorial.dart';
 
+@Singleton(as: FactorialRepository)
 class FactorialRepositoryImpl implements FactorialRepository {
   final ApiBaseService _apiService;
 

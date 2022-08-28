@@ -1,44 +1,23 @@
 import 'package:dio/dio.dart';
-import 'package:domain/repository/palindrome_repository.dart';
 import 'package:get_it/get_it.dart';
+import 'package:injectable/injectable.dart';
 
-import '../repository/factorial_repository.dart';
-import '../service/api_base_service.dart';
 import '../utils/const.dart';
+import 'data_injector.config.dart';
 
-void initDataInjector() {
-  _initApiModule();
-  _initRepositoryModule();
-}
+@InjectableInit()
+void configureDataDependencies(GetIt getIt) => $initGetIt(getIt);
 
-void _initApiModule() {
-  GetIt.I.registerSingleton<Dio>(
-    _dioBuilder(),
-  );
-  GetIt.I.registerSingleton<ApiBaseService>(
-    ApiBaseService(
-      GetIt.I.get(),
-    ),
-  );
-}
+@module
+abstract class DataModule {
+  //for third-party libraries
 
-void _initRepositoryModule() {
-  GetIt.I.registerSingleton<FactorialRepository>(
-    FactorialRepositoryImpl(
-      GetIt.I.get<ApiBaseService>(),
-    ),
-  );
-}
-
-Dio _dioBuilder() {
-  //provide base headers and interceptors here
-  final options = BaseOptions(
-    sendTimeout: C.sendTimeout,
-    receiveTimeout: C.receiveTimeout,
-    connectTimeout: C.connectTimeout,
-  );
-
-  final dio = Dio(options);
-
-  return dio;
+  @singleton
+  Dio dio() => Dio(
+        BaseOptions(
+          sendTimeout: C.sendTimeout,
+          receiveTimeout: C.receiveTimeout,
+          connectTimeout: C.connectTimeout,
+        ),
+      );
 }

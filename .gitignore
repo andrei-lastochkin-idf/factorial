@@ -123,3 +123,5 @@ app.*.symbols
 
 .lock
 .metadata
+
+*_injector.config.dart

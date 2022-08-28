@@ -1,8 +1,10 @@
 import 'package:domain/base/usecase.dart';
+import 'package:injectable/injectable.dart';
 
 import '../model/factorial.dart';
 import '../repository/palindrome_repository.dart';
 
+@injectable
 class FactorialUseCase implements UseCaseParams<int, Future<Factorial>> {
   final FactorialRepository _repository;
 
