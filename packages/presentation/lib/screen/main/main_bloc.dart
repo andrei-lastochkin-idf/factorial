@@ -1,11 +1,14 @@
 import 'package:domain/usecase/factorial_usecase.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:presentation/screen/main/main_data.dart';
 import 'package:presentation/screen/main/main_view_mapper.dart';
 
 import '../../base/bloc.dart';
 
+@injectable
 abstract class MainBloc extends Bloc {
+  @factoryMethod
   factory MainBloc(
     FactorialUseCase useCase,
     MainViewMapper viewMapper,

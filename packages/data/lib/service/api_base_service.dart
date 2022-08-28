@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
 abstract class ApiBaseService {
   factory ApiBaseService(Dio dio) => ApiServiceImpl(dio);
@@ -24,6 +25,7 @@ abstract class ApiBaseService {
   });
 }
 
+@Singleton(as: ApiBaseService)
 class ApiServiceImpl implements ApiBaseService {
   final Dio _dio;
 
