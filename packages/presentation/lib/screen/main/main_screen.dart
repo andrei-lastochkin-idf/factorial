@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/base/bloc_data.dart';
+import 'package:presentation/navigation/base_page.dart';
 import 'package:presentation/screen/main/main_data.dart';
+
 import '../../base/bloc_screen.dart';
 import 'main_bloc.dart';
 
-class MainScreen extends BlocScreen {
+class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
+
+  static const _routeName = '/MainScreen';
+
+  static BasePage page() => BasePage(
+        key: const ValueKey(_routeName),
+        name: _routeName,
+        builder: (context) => const MainScreen(),
+      );
 
   @override
   State createState() => _MainScreenState();
