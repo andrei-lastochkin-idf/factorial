@@ -1,9 +1,13 @@
+import 'package:flutter/widgets.dart';
+
 import '../base/bloc.dart';
 import '../navigation/base_page.dart';
 import 'data/app_data.dart';
 
 abstract class AppBloc extends Bloc {
   factory AppBloc() => _AppBloc();
+
+  void handleRemoveRouteSettings(RouteSettings value);
 }
 
 class _AppBloc extends BlocImpl implements AppBloc {
@@ -13,6 +17,12 @@ class _AppBloc extends BlocImpl implements AppBloc {
   void initState() {
     super.initState();
     _initNavHandler();
+    _updateData();
+  }
+
+  @override
+  void handleRemoveRouteSettings(RouteSettings value) {
+    _appData.pages.remove(value);
     _updateData();
   }
 

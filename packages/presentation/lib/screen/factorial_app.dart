@@ -28,6 +28,10 @@ class _FactorialAppState extends BlocScreenState<StatefulWidget, AppBloc> {
           if (appData is AppData) {
             return Scaffold(
               body: Navigator(
+                onPopPage: (Route<dynamic> route, dynamic result) {
+                  bloc.handleRemoveRouteSettings(route.settings);
+                  return route.didPop(result);
+                },
                 pages: appData.pages.toList(),
               ),
             );
