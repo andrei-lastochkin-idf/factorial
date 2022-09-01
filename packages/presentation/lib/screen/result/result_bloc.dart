@@ -6,6 +6,8 @@ import '../../base/bloc.dart';
 abstract class ResultBloc
     extends Bloc<ResultScreenArguments, ResultScreenData> {
   factory ResultBloc() => _ResultBloc();
+
+  void goBack();
 }
 
 class _ResultBloc extends BlocImpl<ResultScreenArguments, ResultScreenData>
@@ -21,5 +23,11 @@ class _ResultBloc extends BlocImpl<ResultScreenArguments, ResultScreenData>
 
   _updateData() {
     handleData(data: _screenData);
+  }
+
+  @override
+  void goBack() {
+    appNavigator.pop();
+    _updateData();
   }
 }

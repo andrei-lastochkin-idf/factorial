@@ -41,8 +41,14 @@ class _ResultState extends BlocScreenState<ResultScreen, ResultBloc> {
       builder: (context, snapshot) {
         final screenData = snapshot.data?.data;
         return Container(
-          alignment: Alignment.center,
-          child: Text(screenData?.factorial ?? "nothing"),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(screenData?.factorial ?? "nothing"),
+              OutlinedButton(onPressed: bloc.goBack, child: const Text("Back")),
+            ],
+          ),
         );
       },
     );
