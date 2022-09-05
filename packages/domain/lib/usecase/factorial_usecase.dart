@@ -1,16 +1,23 @@
 import 'package:domain/base/usecase.dart';
+import 'package:domain/model/factorial_request.dart';
 
-import '../model/factorial.dart';
-import '../repository/palindrome_repository.dart';
+import '../mapper/mapper.dart';
+import '../model/factorial_response.dart';
+import '../repository/factorial_repository.dart';
 
-class FactorialUseCase implements UseCaseParams<int, Future<Factorial>> {
+class FactorialUseCase
+    implements UseCaseParams<int, Future<FactorialResponse>> {
   final FactorialRepository _repository;
+  final Mapper<int, FactorialRequest> _mapper;
 
-  FactorialUseCase(this._repository);
-
-  @override
-  Future<Factorial> call(int n) async => await _repository.getFactorial(n);
+  FactorialUseCase(this._repository, this._mapper);
 
   @override
-  void dispose(){}
+  Future<FactorialResponse> call(int n) async {
+    final request = _mapper(n);
+    return await _repository.getFactorial(request);
+  }
+
+  @override
+  void dispose() {}
 }

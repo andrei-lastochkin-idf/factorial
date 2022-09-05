@@ -1,5 +1,6 @@
+import 'package:data/service/service_payload.dart';
 import 'package:dio/dio.dart';
-import 'package:domain/repository/palindrome_repository.dart';
+import 'package:domain/repository/factorial_repository.dart';
 import 'package:get_it/get_it.dart';
 
 import '../repository/factorial_repository.dart';
@@ -15,10 +16,8 @@ void _initApiModule() {
   GetIt.I.registerSingleton<Dio>(
     _dioBuilder(),
   );
-  GetIt.I.registerSingleton<ApiBaseService>(
-    ApiBaseService(
-      GetIt.I.get(),
-    ),
+  GetIt.I.registerSingleton<ApiBaseService<ServicePayload>>(
+    ApiServiceImpl(GetIt.I.get()),
   );
 }
 

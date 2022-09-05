@@ -1,15 +1,12 @@
+import 'package:data/service/service_payload.dart';
 import 'package:dio/dio.dart';
 
-abstract class ApiBaseService {
-  factory ApiBaseService(Dio dio) => ApiServiceImpl(dio);
-
+abstract class ApiBaseService<P extends ServicePayload> {
   Future<Response<T>> get<T>(
     String path, {
     bool isResponseBytes,
     Map<String, dynamic> queryParameters,
-    Options options,
-    CancelToken cancelToken,
-    ProgressCallback onReceiveProgress,
+    P? payload,
   });
 
   Future<Response<T>> post<T>(
@@ -17,33 +14,28 @@ abstract class ApiBaseService {
     bool isResponseBytes,
     dynamic data,
     Map<String, dynamic> queryParameters,
-    Options options,
-    CancelToken cancelToken,
-    ProgressCallback onSendProgress,
-    ProgressCallback onReceiveProgress,
+    P? payload,
   });
 }
 
-class ApiServiceImpl implements ApiBaseService {
+class ApiServiceImpl implements ApiBaseService<DioServicePayload> {
   final Dio _dio;
 
   ApiServiceImpl(this._dio);
 
   @override
-  Future<Response<T>> get<T extends dynamic>(
+  Future<Response<T>> get<T>(
     String path, {
     bool isResponseBytes = false,
     Map<String, dynamic>? queryParameters,
-    Options? options,
-    CancelToken? cancelToken,
-    ProgressCallback? onReceiveProgress,
+    DioServicePayload? payload,
   }) async {
     final response = _dio.get<T>(
       path,
       queryParameters: queryParameters,
-      options: options,
-      cancelToken: cancelToken,
-      onReceiveProgress: onReceiveProgress,
+      options: payload?.options,
+      cancelToken: payload?.cancelToken,
+      onReceiveProgress: payload?.onReceiveProgress,
     );
 
     return response;
@@ -55,19 +47,16 @@ class ApiServiceImpl implements ApiBaseService {
     bool isResponseBytes = false,
     dynamic data,
     Map<String, dynamic>? queryParameters,
-    Options? options,
-    CancelToken? cancelToken,
-    ProgressCallback? onSendProgress,
-    ProgressCallback? onReceiveProgress,
+    DioServicePayload? payload,
   }) async {
     final response = _dio.post(
       path,
       data: data,
       queryParameters: queryParameters,
-      options: options,
-      cancelToken: cancelToken,
-      onSendProgress: onSendProgress,
-      onReceiveProgress: onReceiveProgress,
+      options: payload?.options,
+      cancelToken: payload?.cancelToken,
+      onSendProgress: payload?.onSendProgress,
+      onReceiveProgress: payload?.onReceiveProgress,
     );
 
     return response as Future<Response<T>>;
