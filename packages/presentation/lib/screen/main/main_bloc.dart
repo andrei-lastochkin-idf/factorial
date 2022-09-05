@@ -5,6 +5,7 @@ import 'package:presentation/screen/main/main_view_mapper.dart';
 import 'package:presentation/screen/result/result_screen.dart';
 
 import '../../base/bloc.dart';
+import '../cookie/cookie_screen.dart';
 
 abstract class MainBloc extends Bloc {
   factory MainBloc(
@@ -19,6 +20,8 @@ abstract class MainBloc extends Bloc {
   TextEditingController get editController;
 
   void getFactorial();
+
+  void navigateToCookieTest();
 }
 
 class _MainBloc extends BlocImpl implements MainBloc {
@@ -52,6 +55,11 @@ class _MainBloc extends BlocImpl implements MainBloc {
       ResultScreen.page(ResultScreenArguments(factorial: factorialValue)),
     );
     _updateData(isLoading: false);
+  }
+
+  @override
+  void navigateToCookieTest() {
+    appNavigator.push(CookieScreen.page());
   }
 
   _updateData({bool? isLoading}) {

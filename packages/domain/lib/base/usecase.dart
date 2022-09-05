@@ -4,8 +4,14 @@ abstract class UseCase<Output> {
   void dispose();
 }
 
-abstract class UseCaseParams<Params, Output> {
+abstract class UseCaseInOut<Params, Output> {
   Output call(Params params);
+
+  void dispose();
+}
+
+abstract class UseCaseIn<Params> {
+  void call(Params params);
 
   void dispose();
 }

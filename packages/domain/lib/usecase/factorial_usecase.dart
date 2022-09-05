@@ -6,8 +6,8 @@ import '../model/factorial_response.dart';
 import '../repository/factorial_repository.dart';
 
 class FactorialUseCase
-    implements UseCaseParams<int, Future<FactorialResponse>> {
-  final FactorialRepository _repository;
+    implements UseCaseInOut<int, Future<FactorialResponse>> {
+  final NetworkRepository _repository;
   final Mapper<int, FactorialRequest> _mapper;
 
   FactorialUseCase(this._repository, this._mapper);

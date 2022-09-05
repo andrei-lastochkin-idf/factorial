@@ -39,8 +39,12 @@ class _MainScreenState extends BlocScreenState<MainScreen, MainBloc> {
                     Text(blocData.factorial.toString()),
                     TextField(controller: bloc.editController),
                     ElevatedButton(
-                      onPressed: () => bloc.getFactorial(),
+                      onPressed: bloc.getFactorial,
                       child: const Text('Get factorial'),
+                    ),
+                    ElevatedButton(
+                      onPressed: bloc.navigateToCookieTest,
+                      child: const Text('Cookie test'),
                     ),
                   ],
                 ),
