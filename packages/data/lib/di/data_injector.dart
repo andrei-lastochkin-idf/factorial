@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:domain/repository/factorial_repository.dart';
 import 'package:get_it/get_it.dart';
 
+import '../interceptor/cookie_interceptor.dart';
 import '../repository/factorial_repository.dart';
 import '../service/api_base_service.dart';
 import '../utils/const.dart';
@@ -62,7 +63,12 @@ Dio _buildCookieDio() {
   );
 
   final dio = Dio(options);
-  dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+  dio.interceptors.addAll(
+    [
+      CookieInterceptor(),
+      LogInterceptor(requestBody: true, responseBody: true),
+    ],
+  );
 
   return dio;
 }
