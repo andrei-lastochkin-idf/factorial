@@ -7,7 +7,8 @@ class CookieInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.headers[HttpHeaders.cookieHeader] = cookies.join(";");
+    options.headers[HttpHeaders.cookieHeader] =
+        cookies.map((e) => '${e.name}=${e.value}').join(';');
     handler.next(options);
   }
 
