@@ -1,24 +1,36 @@
-import 'package:domain/repository/palindrome_repository.dart';
+import 'package:data/service/service_payload.dart';
+import 'package:domain/model/factorial_request.dart';
+import 'package:domain/model/factorial_response.dart';
+import 'package:domain/repository/factorial_repository.dart';
 
 import '../service/api_base_service.dart';
 import '../utils/const.dart';
-import 'package:domain/model/factorial.dart';
 
-class FactorialRepositoryImpl implements FactorialRepository {
-  final ApiBaseService _apiService;
+class NetworkRepositoryImpl implements NetworkRepository {
+  final ApiBaseService<ServicePayload> _factorialApiService;
+  final ApiBaseService<ServicePayload> _cookieApiService;
 
-  FactorialRepositoryImpl(this._apiService);
+  NetworkRepositoryImpl(this._factorialApiService, this._cookieApiService);
 
   @override
-  Future<Factorial> getFactorial(int n) async {
-    final params = {'expr': 'factorial($n)'};
-    return _apiService
+  Future<FactorialResponse> getFactorial(FactorialRequest request) async {
+    return _factorialApiService
         .get(
           C.apiPath,
-          queryParameters: params,
+          queryParameters: request.toMap(),
         )
         .then(
-          (response) => Factorial(response.data),
+          (response) => FactorialResponse(response.data),
         );
+  }
+
+  @override
+  void generateCookie() {
+    _cookieApiService.get(C.cookieGeneratePath);
+  }
+
+  @override
+  Future<void> getData() async {
+    _cookieApiService.get(C.cookieGetDataPath);
   }
 }
