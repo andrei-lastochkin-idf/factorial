@@ -2,6 +2,7 @@ import 'package:domain/usecase/factorial_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/screen/main/main_data.dart';
 import 'package:presentation/screen/main/main_view_mapper.dart';
+import 'package:presentation/screen/result/result_screen.dart';
 
 import '../../base/bloc.dart';
 
@@ -46,7 +47,10 @@ class _MainBloc extends BlocImpl implements MainBloc {
     _updateData(isLoading: true);
     final currentValue = int.tryParse(_editController.text) ?? 0;
     final factorial = await _useCase(currentValue);
-    _viewMapper.mapFactorialResponseToScreenData(_screenData, factorial);
+    final factorialValue = factorial.value;
+    appNavigator.push(
+      ResultScreen.page(ResultScreenArguments(factorial: factorialValue)),
+    );
     _updateData(isLoading: false);
   }
 

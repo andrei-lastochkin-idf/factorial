@@ -1,19 +1,19 @@
-class BlocData {
+class BlocData<D> {
   bool isLoading;
-  dynamic data;
+  D? data;
   BlocData(
     this.isLoading,
     this.data,
   );
 
-  factory BlocData.init() => BlocData(
+  factory BlocData.init() => BlocData<D>(
         false,
         null,
       );
 
-  BlocData copy() => BlocData(
+  BlocData<D?> copy<D>() => BlocData<D?>(
         isLoading,
-        data,
+        data as D,
       );
 
   void updateParams(
