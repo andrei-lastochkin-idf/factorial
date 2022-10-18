@@ -18,13 +18,7 @@ default_platform(:android)
 platform :android do
 
   desc "Build and upload to FAD"
-  lane :build_fad do |options|
-    gradle(task: "clean")
-    gradle(
-      task: "assemble",
-      build_type: "Debug",
-      properties: {"target" => './lib/main.dart' },
-    )
+  lane :upload_fad do |options|
     firebase_app_distribution(
       app: options[:firebase_app_id],
       firebase_cli_token: options[:firebase_cli_token],
