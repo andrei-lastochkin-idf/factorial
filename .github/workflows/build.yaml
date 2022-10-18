@@ -20,4 +20,3 @@ jobs:
       - run: flutter --version
       - name: Build APK
         run: flutter build apk --debug
-
