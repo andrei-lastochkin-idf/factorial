@@ -19,11 +19,12 @@ platform :android do
 
   desc "Build and upload to FAD"
   lane :build_fad do |options|
-    gradle(task: "clean")
+    gradle(task: "clean", project_dir: "android/")
     gradle(
       task: "assemble",
       build_type: "Debug",
       properties: {"target" => './lib/main.dart' },
+      project_dir: "android/"
     )
     firebase_app_distribution(
       app: options[:firebase_app_id],
