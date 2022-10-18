@@ -19,7 +19,7 @@ jobs:
           channel: 'stable'
       - run: flutter --version
       - name: Build APK
-        run: cd androidApp && bundle exec fastlane build_fad firebase_app_id:${{secrets.FIREBASE_ANDROID_APP_ID}} firebase_cli_token:${{secrets.FIREBASE_TOKEN}}
+        run: cd android && bundle exec fastlane build_fad firebase_app_id:${{secrets.FIREBASE_ANDROID_APP_ID}} firebase_cli_token:${{secrets.FIREBASE_TOKEN}}
 #        run: flutter build apk --debug
 #      - name: upload artifact to Firebase App Distribution
 #        uses: wzieba/Firebase-Distribution-Github-Action@v1.3.5
