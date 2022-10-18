@@ -14,9 +14,9 @@ jobs:
 #          channel: 'stable'
 #      - run: flutter --version
       - name: Debug check
-        run: | 
-        echo $GITHUB_WORKSPACE
-        ls
+        run: echo $GITHUB_WORKSPACE
+      - name: Debug check1
+        run: ls
       - name: Build APK
         run: flutter build apk --debug
 
