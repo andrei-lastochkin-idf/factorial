@@ -22,6 +22,8 @@ jobs:
         run: flutter pub get
       - name: Build APK
         run: flutter build apk --debug
+      - name: Add fastlane FAD plugin
+        run: fastlane add_plugin firebase_app_distribution
       - name: Upload APK
         run: cd android && fastlane upload_fad firebase_app_id:${{secrets.FIREBASE_ANDROID_APP_ID}} firebase_cli_token:${{secrets.FIREBASE_TOKEN}}
 
