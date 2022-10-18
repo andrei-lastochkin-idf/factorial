@@ -1,0 +1,13 @@
+name: build-apps
+
+on:
+  push:
+    branches:
+      - '**'
+jobs:
+  build:
+    runs-on: macos-12
+    steps:
+      - name: Build APK
+        run: flutter build apk --debug
+
