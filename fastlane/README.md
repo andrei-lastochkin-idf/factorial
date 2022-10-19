@@ -15,10 +15,10 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## Android
 
-### android build_fad
+### android upload_fad
 
 ```sh
-[bundle exec] fastlane android build_fad
+[bundle exec] fastlane android upload_fad
 ```
 
 Build and upload to FAD
